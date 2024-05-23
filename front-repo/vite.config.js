@@ -10,5 +10,16 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  server: {
+    proxy: {
+      '/api' : {
+        target: 'http://localost:8080',
+        changeOrigin: true,
+      }
+    }
+  },
+  build: {
+    outDir: "../back-repo/demo/src/main/resources/static/dist"
   }
 })
