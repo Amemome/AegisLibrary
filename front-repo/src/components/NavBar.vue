@@ -10,7 +10,7 @@
     </nav>
 
     <div class="navbar-right">
-      <RouterLink to="/login" class="navbar-right">
+      <RouterLink to="/user/login" class="navbar-right">
         <button class="login-button">Login</button>
       </RouterLink>
     </div>
@@ -82,6 +82,9 @@ import { RouterLink } from 'vue-router'
 }
 
 .navbar-right .login-button:hover {
-  background-color: #45a049;
+  background-color: rgb(69, 160, 73,0.3);
+  border-radius: 20px;
+  backdrop-filter: (6px);
+  
 }
 </style>

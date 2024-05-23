@@ -18,7 +18,8 @@ import { ref } from 'vue'
 const borrowedBooks = ref([
   { id: 1, title: 'The grat' },
   { id: 2, title: 'The man' },
-  { id: 3, title: 'iamtheman' }
+  { id: 3, title: 'iamtheman' },
+  { id: 5, title: 'asdfasdfsd'}
 ])
 </script>
 
