@@ -1,16 +1,17 @@
 <template>
   <div class="login-container">
-    <h2>Login</h2>
+    <h2>로그인</h2>
     <form @submit.prevent="handleLogin">
       <div class="input-group">
-        <label for="email">Email:</label>
+        <label for="email">학번:</label>
         <input type="email" id="email" v-model="email" required />
       </div>
       <div class="input-group">
-        <label for="password">Password:</label>
+        <label for="password">비밀번호:</label>
         <input type="password" id="password" v-model="password" required />
       </div>
       <button type="submit">Login</button>
+      <RouterLink to="/user/register" class="register">회원가입</RouterLink>
     </form>
   </div>
 </template>
@@ -39,7 +40,7 @@ const handleLogin = () => {
   background-color: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   width: 300px;
 }
 
