@@ -11,7 +11,6 @@
 
 <style scoped>
 .left-side-bar {
-  margin-right: 5vw;
   padding: 1.5vw;
   background-color: rgb(250, 235, 215, 0.5);
   width: 15vw;

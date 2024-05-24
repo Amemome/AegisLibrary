@@ -7,9 +7,18 @@ import MyHome from '../components/MyHome.vue'
 <template>
   <div id="app">
     <NavBar />
-    <div id="contents">
+    <div class="content">
       <LeftSideBar />
       <MyHome />
-    </div>
+  </div>
   </div>
 </template>
+
+<style scoped>
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+
+</style>
