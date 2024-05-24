@@ -19,7 +19,4 @@ export default defineConfig({
       }
     }
   },
-  build: {
-    outDir: "../back-repo/demo/src/main/resources/static/dist"
-  }
 })
