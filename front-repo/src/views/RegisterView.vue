@@ -3,16 +3,16 @@
       <h2>회원가입</h2>
       <form @submit.prevent = "register">
         <div class="input-group">
-          <input placeholder = "학번" type="studentID" id="studentID" v-model="studentID" required />
+          <input placeholder = "학번" type="text" id="studentID" v-model="studentID" class="input" maxlength="8"  required />
         </div>
         <div class="input-group">
-          <input placeholder = "실명" type="name" id="name" v-model="name" required />
+          <input placeholder = "실명" type="input"  id="name" v-model="name" class="input" required />
         </div>
         <div class="input-group">
-          <input placeholder = "비밀번호" type="password" id="password" v-model="password" required />
+          <input placeholder = "비밀번호" type="input"  id="password" v-model="password" class="input" required />
         </div>
         <div class="input-group">
-          <input placeholder = "비밀번호 확인" type="passwordcheck" id="passwordcheck" v-model="passwordcheck" required />
+          <input placeholder = "비밀번호 확인" type="input"  id="passwordcheck" v-model="passwordcheck" class="input" required />
         </div>
         <button type="submit">회원가입</button>
         <p v-if = "errorMessage" class = "error-message">{{ errorMessage }} </p> 
@@ -79,8 +79,8 @@ export default {
     margin-bottom: 1rem;
   }
   
-  input[type='email'],
-  input[type='password'] {
+
+  .input {
     width: 100%;
     padding: 0.5rem;
     margin-top: 0.5rem;

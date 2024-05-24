@@ -1,19 +1,21 @@
 <script setup>
-defineProps({
-  msg: String
-})
+import SearchBar from "./SearchBar.vue"
 </script>
 
 <template>
   <div class="home">
-    <input type="text" placeholder="도서 검색" v-model="searchQuery" />
+    <SearchBar />
   </div>
 </template>
 
 <style scoped>
-.hello {
-  background-color: red;
+
+.home {
+  margin-top: 7vh; 
+  flex: 1;
 }
+
+
 </style>
 
 
