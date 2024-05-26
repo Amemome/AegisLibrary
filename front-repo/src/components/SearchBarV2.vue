@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { defineProps } from 'vue';
 
+
+
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   alignitem: String,               //부모 컴포넌트에서 import 를 할 때 추가할 요소.
@@ -19,28 +21,49 @@ const SearchBooks = () => {
 }
 
 </script>
-
 <template>
-    <div id="search-bar">
-        <form autocomplete="on" @submit.prevent="SearchBooks">
-            <div id = "input-box">
-                <input type="text" class="searchinput"
-                v-model="query" 
-                required />
-                <input type="submit" class="search-button" value=""/>
-            
-            </div>
-
-        </form>    
-    </div>
+  <div id="search-bar">
+    <form autocomplete="on" @submit.prevent="SearchBooks">
+      <div class="SearchTable">
+        <select id="search-type" v-model="searchType">
+          <option value="title"></option>
+          <option value="title">제목</option>
+          <option value="author">저자</option>
+          <option value="publisher">출판사</option>
+        </select>
+      </div>
+      <div class="SearchTable">
+        <select id="search-type" v-model="searchType">
+          <option value="title">제목</option>
+          <option value="author">저자</option>
+          <option value="publisher">출판사</option>
+        </select>
+      </div>
+      <div id="input-box">
+        <input type="text" class="searchinput" v-model="query" required />
+        <input type="submit" class="search-button" value="" />
+      </div>
+    </form>
+  </div>
 </template>
 
+
 <style scoped>
-#search-bar {
+label {
+  font-size: 10px;
+}
+
+form {
   flex: 1;
   display: flex;
-  justify-content: center;
   padding: 20px;
+  flex-direction: row;
+}
+
+.search-form {
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
 
 #input-box {
@@ -82,5 +105,33 @@ const SearchBooks = () => {
 
 .search-button:active {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.SearchTable {
+  height: 44px;
+  width: 98px;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255);
+  clip-path: path('M0 0 H120 A20 20 0 0 0 100 44 H0 A20 20 0 0 1 0 0 Z');
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+select {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+}
+
+#search-type {
+  width: 100%;
+  font-size: 12px;
+}
+
+select:focus {
+  outline: none;
 }
 </style>

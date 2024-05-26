@@ -1,24 +1,21 @@
 <script setup>
-import NavBar from '../components/NavBar.vue'
 import LeftSideBar from '../components/LeftSideBar.vue'
-import MyHome from '../components/MyHome.vue'
+import SearchBar from '../components/SearchBar.vue'
 </script>
 
 <template>
-  <div id="app">
-    <NavBar />
-    <div class="content">
+  <div class="components">
       <LeftSideBar />
-      <MyHome />
+      <SearchBar alignitem = "center" />         
   </div>
-  </div>
+
 </template>
 
 <style scoped>
-.content {
-  display: flex;
+.components {
+  display:flex;
   flex-direction: row;
-}
 
+}
 
 </style>

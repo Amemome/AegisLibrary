@@ -1,39 +1,28 @@
 <template>
   <header class="navbar">
     <div class="navbar-left">
-      <h2>Aegis Book</h2>
+    <RouterLink to = "/" class="title">Aegis Book</RouterLink>
     </div>
     <nav class="navbar-center">
-      <RouterLink to="/" class="navbar-center-elemnt">Home</RouterLink>
-      <RouterLink to="/about" class="navbar-center-elemnt">About</RouterLink>
-      <RouterLink to="/contact" class="navbar-center-elemnt">Contact</RouterLink>
+      <a href="https://dk-aegis.org/" class="navbar-center-elemnt">이지스 홈페이지</a>
+      <RouterLink to="/about" class="navbar-center-elemnt">내 서재</RouterLink>
+      <RouterLink to="/contact" class="navbar-center-elemnt">도서 신청</RouterLink>
     </nav>
 
     <div class="navbar-right">
       <RouterLink to="/user/login" class="navbar-right">
-        <button class="login-button">Login</button>
+        <button class="login-button">로그인</button>
       </RouterLink>
     </div>
   </header>
+  <Transition name="searchbartransition" mode="out-in"><RouterView></RouterView></Transition>
+  
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
 </script>
 
-<style scoped>
-.navbar {
-  font-family:
-    Inter var,
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
-}
-</style>
 
 <style scoped>
 .navbar {
@@ -44,11 +33,16 @@ import { RouterLink } from 'vue-router'
   background-color: hsl(0, 27%, 84%, 0.5);
   color: #1f1e33;
   backdrop-filter: blur(5px);
+  padding: 2vh;
+  padding-left: 0vw;
 }
 
-.navbar-left h2 {
-  margin-left: 4vw;
+.title {
+  text-decoration: none;
+  margin-left: 3vw;
   font-family: 'Charis SIL', serif;
+  color: #1f1e33;
+  font-size: 36px;
 }
 
 .navbar-center {

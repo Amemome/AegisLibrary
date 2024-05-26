@@ -4,12 +4,15 @@ import LoginView from '../views/LoginView.vue'
 import LoginLayout from '../layouts/LoginLayout.vue'
 import AboutView from '@/views/AboutView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import SearchPage from '@/views/SearchPage.vue'
+import UserPage from '@/views/UserPage.vue'
+import NavBar from '@/components/NavBar.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: HomeView,
+    component: NavBar,
     children: [
       {
         path: '/',
@@ -19,6 +22,11 @@ const routes = [
         path: 'about',
         name: 'about',
         component: AboutView
+      },
+      {
+        path: 'search',
+        name: 'search',
+        component: SearchPage
       }
     ]
   },
@@ -28,13 +36,18 @@ const routes = [
     children: [
       {
         path: 'login',
-        name: 'Login',
+        name: 'login',
         component: LoginView
       },
       {
         path: 'register',
-        name: 'Register',
+        name: 'register',
         component: RegisterView
+      },
+      {
+        path: '/',
+        name: 'profile',
+        component: UserPage
       }
     ]
   }

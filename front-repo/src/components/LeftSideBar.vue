@@ -25,6 +25,6 @@
 </style>
 
 <script setup>
-import LoaningBook from './LoaningBook.vue'
-import RecentAccess from './RecentAccess.vue'
+import LoaningBook from './LeftBarcomps/LoaningBook.vue'
+import RecentAccess from './LeftBarcomps/RecentAccess.vue'
 </script>
