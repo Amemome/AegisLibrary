@@ -1,7 +1,7 @@
 <template>
   <header class="navbar">
     <div class="navbar-left">
-    <RouterLink to = "/" class="title">Aegis Book</RouterLink>
+      <RouterLink to="/" class="title">Aegis Book</RouterLink>
     </div>
     <nav class="navbar-center">
       <a href="https://dk-aegis.org/" class="navbar-center-elemnt">이지스 홈페이지</a>
@@ -13,16 +13,30 @@
       <RouterLink to="/user/login" class="navbar-right">
         <button class="login-button">로그인</button>
       </RouterLink>
+      <!-- 새로운 버튼 추가 -->
+      <button @click="sendRequest" class="login-button">요청 보내기</button>
     </div>
   </header>
-  <Transition name="searchbartransition" mode="out-in"><RouterView></RouterView></Transition>
-  
+  <Transition name="searchbartransition" mode="out-in">
+    <RouterView></RouterView>
+  </Transition>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
-</script>
+import axios from 'axios'
 
+// 요청을 보내는 메소드 정의
+const sendRequest = () => {
+  axios.get('http://localhost:8080/api/message')
+    .then(response => {
+      console.log('Response from server:', response.data)
+    })
+    .catch(error => {
+      console.error('There was an error!', error)
+    })
+}
+</script>
 
 <style scoped>
 .navbar {
@@ -76,9 +90,8 @@ import { RouterLink } from 'vue-router'
 }
 
 .navbar-right .login-button:hover {
-  background-color: rgb(69, 160, 73,0.3);
+  background-color: rgb(69, 160, 73, 0.3);
   border-radius: 20px;
   backdrop-filter: (6px);
-  
 }
 </style>
