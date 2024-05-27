@@ -35,6 +35,15 @@ export const useUserStore = defineStore('user', {
       this.user = null;
       this.admin = null;
       delete axios.defaults.headers.common['Authorization'];
+    },
+    async fetchUserProfile() {
+        try {
+            const response = await axios.get('/user/profile');
+            return response.data;
+        } catch (error) {
+            console.error('Failed to fetch user profile',error)
+        }
+
     }
   }
 });

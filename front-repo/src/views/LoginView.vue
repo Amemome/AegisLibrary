@@ -3,34 +3,46 @@
     <h2>로그인</h2>
     <form @submit.prevent="handleLogin">
       <div class="input-group">
-        <label for="email">학번:</label>
-        <input type="email" id="email" v-model="email" required />
+        <label for="studentId">학번:</label>
+        <input type="text" id="studentId" v-model="studentId" @input="validateStudentID" required />
       </div>
       <div class="input-group">
         <label for="password">비밀번호:</label>
         <input type="password" id="password" v-model="password" required />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit" :disabled="!isStudentIdValid || !password">로그인</button>
       <RouterLink to="/user/register" class="register">회원가입</RouterLink>
     </form>
   </div>
 </template>
 
+
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/UserStore';
 
-const email = ref('')
+const studentID = ref('')
 const password = ref('')
+const isStudentIdValid = ref(false)
 const router = useRouter()
+const userStore = useUserStore()
 
-const handleLogin = () => {
-  // 여기에 실제 인증 로직을 추가하십시오.
-  if (email.value === 'user@example.com' && password.value === 'password') {
-    alert('Login successful!')
-    router.push('/')
-  } else {
-    alert('Invalid credentials!')
+const validateStudentID = () => { 
+  isStudentIdValid.value = /^\d+$/.test(studentID.value)
+}
+
+const handleLogin = async () => {
+  try {
+    await userStore.login({ studentId: studentID.value, password: password.value })
+    if (userStore.isLogin) {
+      router.push('/user/profile')
+    } else {
+      alert('Invalid credentials!')
+    }
+  } catch (error) {
+    alert('Login failed!')
+    console.error(error)
   }
 }
 </script>
