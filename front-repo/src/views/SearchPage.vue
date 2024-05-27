@@ -3,7 +3,6 @@
       <LeftSideBar />
       <div class = "realbody">
         <SearchBar />
-        <SearchTable />
       <div class="book-list">
         <SearchComponents
           v-for="(book, index) in books"

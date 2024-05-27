@@ -34,9 +34,16 @@ const SearchBooks = () => {
       </div>
       <div class="SearchTable">
         <select id="search-type" v-model="searchType">
+          <optgroup label="프로그래밍 언어">
+          <option value="title">제목</option> 
+          <option value="author">저자</option>
+          <option value="publisher">출판사</option  >
+          </optgroup>
+          <optgroup label="분야">
           <option value="title">제목</option>
           <option value="author">저자</option>
           <option value="publisher">출판사</option>
+        </optgroup>
         </select>
       </div>
       <div id="input-box">
