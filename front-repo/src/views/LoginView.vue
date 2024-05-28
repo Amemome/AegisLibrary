@@ -4,7 +4,7 @@
     <form @submit.prevent="handleLogin">
       <div class="input-group">
         <label for="studentId">학번:</label>
-        <input type="text" id="studentId" v-model="studentId" @input="validateStudentID" required />
+        <input type="number" id="studentId" v-model="studentId" @input="validateStudentID" required />
       </div>
       <div class="input-group">
         <label for="password">비밀번호:</label>
@@ -15,6 +15,7 @@
     </form>
   </div>
 </template>
+
 
 
 <script setup>
@@ -48,6 +49,15 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 .login-container {
   background-color: white;
   padding: 2rem;

@@ -24,6 +24,7 @@
 
 import axios from 'axios';
 
+
 export default {
       data() {               //이 컴포넌트(vue파일) 에서 정의되는 컴포넌트의 상태를 정의한다
           return {
@@ -54,9 +55,7 @@ export default {
 
                 if (response.status === 200) {
                   alert('회원가입 성공!')
-                  window.location.href = '/';
-                  } else {
-                    alert('회원가입 실패 ~~~ ㅠㅠㅠ')
+                  this.$router.push('/')
                   }
             } catch (error) {
                 if (error.response && error.response.data) {
