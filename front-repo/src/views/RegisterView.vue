@@ -3,45 +3,50 @@
       <h2>회원가입</h2>
       <form @submit.prevent = "register">
         <div class="input-group">
-          <input placeholder = "학번" type="text" id="studentID" v-model="studentID" class="input" maxlength="8"  required />
+          <input placeholder = "학번" type="number" id="studentID" v-model="studentID" class="input" maxlength="8"  required />
         </div>
         <div class="input-group">
-          <input placeholder = "실명" type="input"  id="name" v-model="name" class="input" required />
+          <input placeholder = "실명" type="text"  id="name" pattern="[A-Za-z\uAC00-\uD7A3]+"  v-model="name" class="input" required />
         </div>
         <div class="input-group">
-          <input placeholder = "비밀번호" type="input"  id="password" v-model="password" class="input" required />
+          <input placeholder = "비밀번호" type="password"  id="password" v-model="password" class="input" required />
         </div>
         <div class="input-group">
-          <input placeholder = "비밀번호 확인" type="input"  id="passwordcheck" v-model="passwordcheck" class="input" required />
+          <input placeholder = "비밀번호 확인" type="password"  id="passwordcheck" v-model="passwordcheck" class="input" required />
+          <span v-if="isPasswordMatch" class="check-mark">✔</span>
         </div>
         <button type="submit">회원가입</button>
-        <p v-if = "errorMessage" class = "error-message">{{ errorMessage }} </p> 
       </form>
     </div>
 </template>
-  
+   
 <script>
 
 import axios from 'axios';
 
 export default {
-    data() { 
-        return {
-            studentID: '',
-            name : '',
-            password:'',
-            passwordcheck: '',
-            errormessage:'',
+      data() {               //이 컴포넌트(vue파일) 에서 정의되는 컴포넌트의 상태를 정의한다
+          return {
+              studentID: '',
+              name : '',              //이 객체에는 컴포넌트에서 사용될 모든 변수들임.
+              password:'',
+              passwordcheck: '',
+              errormessage:'',
         };
+    },  
+    computed: {
+      isPasswordMatch() {
+      return this.password && this.passwordcheck && this.password === this.passwordcheck;
+    }
     },
-    methods: {
+    methods: {                // 각 컴포넌트에서 사용할 수 있는 메서드들을 정의한다.
         async register() {
             if ( this.passwordcheck !== this.password) {
                 this.errorMessage = '비밀번호가 일치하지 않아요!'
                 return;
-            } 
+            }
             try {
-                const response = await axios.post('http://localhost:8080/api/users/register' , {
+                const response = await axios.post('http://localhost:8080/api/registerplease' , {
                     studentID: this.studentID,
                     name: this.name,
                     password: this.password,
@@ -57,11 +62,20 @@ export default {
             
         }
     }
-}
+  }
+  
+
   
 </script>
-  
+    
 <style scoped>
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
   .login-container {
     background-color: white;
     padding: 2rem;
@@ -96,6 +110,10 @@ export default {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+  }
+  
+  .check-mark {
+    color:greenyellow;
   }
   
   button:hover {
