@@ -47,11 +47,12 @@ export default {
                 return;
             }       
             try {
-                const response = await axios.post('http://localhost:8080/api/registerplease' , {
-                    studentID: this.studentID,
-                    name: this.name,
-                    password: this.password,
-                }, {
+                const userData = {
+                  studentID: this.studentID,
+                  name: this.name,
+                  password: this.password,
+                }
+                const response = await axios.post('http://localhost:8080/api/registerplease' , userData, {
                   headers: {
                     'Content-Type': 'application/json',
                   }
@@ -61,6 +62,9 @@ export default {
                 if (response.status === 200) {
                   alert('회원가입 성공!')
                   this.$router.push('/')
+                  } else {
+                  alert('회원가입중 오류가 발생하였습니다')
+                  this.$router.push('/user/register')
                   }
             } catch (error) {
                 if (error.response && error.response.data) {

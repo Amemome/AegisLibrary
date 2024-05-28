@@ -3,12 +3,10 @@
     <h2>로그인</h2>
     <form @submit.prevent="handleLogin">
       <div class="input-group">
-        <label for="studentId">학번:</label>
-        <input type="number" id="studentId" v-model="studentId" @input="validateStudentID" required />
+        <input placeholder="학번" type="number" id="studentId" v-model="studentId" @input="validateStudentID" required />
       </div>
       <div class="input-group">
-        <label for="password">비밀번호:</label>
-        <input type="password" id="password" v-model="password" required />
+        <input placeholder = "비밀번호" type="password" id="password" v-model="password" required />
       </div>
       <button type="submit" :disabled="!isStudentIdValid || !password">로그인</button>
       <RouterLink to="/user/register" class="register">회원가입</RouterLink>
@@ -19,23 +17,23 @@
 
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue'            //ref 는 반응형 변수,. 업뎃되면 
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore';
 
 const studentID = ref('')
 const password = ref('')
-const isStudentIdValid = ref(false)
+const isStudentIdValid = ref(false)       
 const router = useRouter()
 const userStore = useUserStore()
 
 const validateStudentID = () => { 
-  isStudentIdValid.value = /^\d+$/.test(studentID.value)
+  isStudentIdValid.value = /^\d+$/.test(studentID.value)    //정규식으로 숫자만으로 구성되었는지 확인한다.
 }
 
 const handleLogin = async () => {
   try {
-    await userStore.login({ studentId: studentID.value, password: password.value })
+    await userStore.login({ studentID: studentID.value, password: password.value })
     if (userStore.isLogin) {
       router.push('/user/profile')
     } else {
@@ -75,7 +73,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
-input[type='email'],
+input[type='number'],
 input[type='password'] {
   width: 100%;
   padding: 0.5rem;

@@ -18,7 +18,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async login(auth) {
       try {
-        const response = await axios.post('/authplease', auth); //post 서버에 요청 보내기 (엔드포인트,내용)
+        const response = await axios.post('/loginplease', auth); //post 서버에 요청 보내기 (엔드포인트,내용)
         const token = response.data.token;
         this.token = token;
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
