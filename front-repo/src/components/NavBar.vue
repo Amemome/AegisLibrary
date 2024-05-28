@@ -14,7 +14,6 @@
         <button class="login-button">로그인</button>
       </RouterLink>
       <!-- 새로운 버튼 추가 -->
-      <button @click="sendRequest" class="login-button">요청 보내기</button>
     </div>
   </header>
   <Transition name="searchbartransition" mode="out-in">
@@ -24,18 +23,8 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
-import axios from 'axios'
 
 // 요청을 보내는 메소드 정의
-const sendRequest = () => {
-  axios.get('http://localhost:8080/api/message')
-    .then(response => {
-      console.log('Response from server:', response.data)
-    })
-    .catch(error => {
-      console.error('There was an error!', error)
-    })
-}
 </script>
 
 <style scoped>

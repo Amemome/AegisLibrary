@@ -9,10 +9,10 @@
           <input placeholder = "실명" type="text"  id="name" pattern="[A-Za-z\uAC00-\uD7A3]+"  v-model="name" class="input" required />
         </div>
         <div class="input-group">
-          <input placeholder = "비밀번호" type="password"  id="password" v-model="password" class="input" required />
+          <input placeholder = "비밀번호" type="password"  id="password" minlength="8" maxlength="20" v-model="password" class="input" required />
         </div>
         <div class="input-group">
-          <input placeholder = "비밀번호 확인" type="password"  id="passwordcheck" v-model="passwordcheck" class="input" required />
+          <input placeholder = "비밀번호 확인" type="password"  id="passwordcheck" minlength="8" maxlength="20" v-model="passwordcheck" class="input" required />
           <span v-if="isPasswordMatch" class="check-mark">✔</span>
         </div>
         <button type="submit">회원가입</button>
@@ -22,7 +22,7 @@
    
 <script>
 
-import axios from 'axios';
+import Axios from '@/api';
 
 
 export default {
@@ -47,17 +47,12 @@ export default {
                 return;
             }       
             try {
-                const userData = {
-                  studentID: this.studentID,
+                const userData = {              //미리 정의를 해놔야지 이게 들어감 아니면 null 나와요 
+                  studentID: this.studentID,    
                   name: this.name,
                   password: this.password,
                 }
-                const response = await axios.post('http://localhost:8080/api/registerplease' , userData, {
-                  headers: {
-                    'Content-Type': 'application/json',
-                  }
-                }
-              ); 
+                const response = await Axios.post('/api/registerplease' , userData); 
 
                 if (response.status === 200) {
                   alert('회원가입 성공!')
