@@ -54,19 +54,27 @@ export default {
                 }
                 const response = await Axios.post('/api/registerplease' , userData); 
 
-                if (response.status === 200) {
+                if (response.status == 200) {
                   alert('회원가입 성공!')
                   this.$router.push('/')
-                  } else if (response.status === 409) {
+                  } else if (response.status == 409) {
                   alert('중복입니다~~')
                   this.$router.push('/user/register')
                   }
             } catch (error) {
-                if (error.response && error.response.data) {
-                    this.errorMessage = error.response.data;
-                } else {
-                    this.errorMessage = 'An error occurred during registration';
-                }
+              if (error.response) {
+          if (error.response.status === 409) {
+            alert('중복된 정보입니다.');
+          } else {
+            this.errormessage = error.response.data;
+          }
+        } else {
+          this.errormessage = '회원가입 중 오류가 발생했습니다';
+        }
+        this.$router.push('/user/register');
+
+
+                    
             }
             
         }
