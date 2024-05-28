@@ -51,7 +51,13 @@ export default {
                     name: this.name,
                     password: this.password,
                 }); 
-                console.log('succedss!',response.data);
+
+                if (response.status === 200) {
+                  alert('회원가입 성공!')
+                  window.location.href = '/';
+                  } else {
+                    alert('회원가입 실패 ~~~ ㅠㅠㅠ')
+                  }
             } catch (error) {
                 if (error.response && error.response.data) {
                     this.errorMessage = error.response.data;
