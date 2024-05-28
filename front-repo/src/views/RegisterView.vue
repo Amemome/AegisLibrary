@@ -57,8 +57,8 @@ export default {
                 if (response.status === 200) {
                   alert('회원가입 성공!')
                   this.$router.push('/')
-                  } else {
-                  alert('회원가입중 오류가 발생하였습니다')
+                  } else if (response.status === 409) {
+                  alert('중복입니다~~')
                   this.$router.push('/user/register')
                   }
             } catch (error) {
