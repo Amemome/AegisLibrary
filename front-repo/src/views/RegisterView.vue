@@ -45,13 +45,18 @@ export default {
             if ( this.passwordcheck !== this.password) {
                 this.errorMessage = '비밀번호가 일치하지 않아요!'
                 return;
-            }
+            }       
             try {
                 const response = await axios.post('http://localhost:8080/api/registerplease' , {
                     studentID: this.studentID,
                     name: this.name,
                     password: this.password,
-                }); 
+                }, {
+                  headers: {
+                    'Content-Type': 'application/json',
+                  }
+                }
+              ); 
 
                 if (response.status === 200) {
                   alert('회원가입 성공!')
