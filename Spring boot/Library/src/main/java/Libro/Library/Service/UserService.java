@@ -31,6 +31,5 @@ public class UserService {
         user.setPasswd(passwordEncoder.encode(userCreateForm.getPassword()));
 
         return userRepository.save(user);
-
     }
 }

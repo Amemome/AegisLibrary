@@ -15,10 +15,12 @@ export const useUserStore = defineStore('user', {         //유저 고유 정보
     async login(loginplz) {
       try {
         const response = await Axios.post('/api/loginplease', loginplz); //post 서버에 요청 보내기 (엔드포인트,내용)
-        console.log(response)
-        const token = response.data.token;
-        console.log(token)
+        console.log(response)    //확인용            
+        const token = response.data.token;   
+        console.log(token)        //확인용           
         this.token = token;
+
+        localStorage.setItem('jwtToken',token)
         Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; 
         
       } catch (error) {
