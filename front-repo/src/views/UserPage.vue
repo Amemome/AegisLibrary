@@ -3,9 +3,14 @@
     <div v-if = "profile">
         <h1>User Profile</h1>
         <p>Username: {{ profile.username }}</p>
+
+
     
     
     </div>
+    <div class = "booklog"></div>
+
+    
 </template>
 
 <script setup>
