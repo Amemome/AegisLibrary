@@ -26,7 +26,7 @@ public class UserService {
             throw new DataIntegrityViolationException("이미 사용중인 아이디입니다.");
 
         siteuser user = new siteuser();
-        user.setUsname(userCreateForm.getUsname());
+        user.setUsname(userCreateForm.getUsname()   );
         user.setStudentID(userCreateForm.getStudentID());
         user.setPasswd(passwordEncoder.encode(userCreateForm.getPassword()));
 
