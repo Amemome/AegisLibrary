@@ -22,11 +22,11 @@ public class UserService {
         if(userRepository.existsByStudentID(userCreateForm.getStudentID()))
             throw new DataIntegrityViolationException("이미 사용중인 학번입니다.");
 
-        if(userRepository.existsByUsname(userCreateForm.getUsname()))
+        if(userRepository.existsByUsname(userCreateForm.getName()))
             throw new DataIntegrityViolationException("이미 사용중인 아이디입니다.");
 
         siteuser user = new siteuser();
-        user.setUsname(userCreateForm.getUsname()   );
+        user.setUsname(userCreateForm.getName());
         user.setStudentID(userCreateForm.getStudentID());
         user.setPasswd(passwordEncoder.encode(userCreateForm.getPassword()));
 

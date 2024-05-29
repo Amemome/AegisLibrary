@@ -36,7 +36,7 @@ public class UserController {
         userService.create(userCreateForm);
 
         System.out.println("Student ID: " + userCreateForm.getStudentID());
-        System.out.println("Name: " + userCreateForm.getUsname());
+        System.out.println("Name: " + userCreateForm.getName());
         System.out.println("Password: " + userCreateForm.getPassword());
 
         return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);

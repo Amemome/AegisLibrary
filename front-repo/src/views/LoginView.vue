@@ -3,10 +3,10 @@
     <h2>로그인</h2>
     <form @submit.prevent="handleLogin">
       <div class="input-group">
-        <input placeholder="학번" type="number" id="studentId" v-model="studentID"  required />
+        <input placeholder = "학번" type="number" id="studentID" v-model="studentID" class="input" maxlength="8"  required />
       </div>
       <div class="input-group">
-        <input placeholder = "비밀번호" type="password" id="password" v-model="password" required />
+        <input placeholder = "비밀번호" type="password"  id="password" minlength="8" maxlength="20" v-model="password" class="input" required />
       </div>
       <button type="submit">로그인</button>
       <RouterLink to="/user/register" class="register">회원가입</RouterLink>
@@ -27,16 +27,22 @@ const router = useRouter()
 const userStore = useUserStore()          //유저상태보기
 
 
-const handleLogin = async () => {
+const handleLogin = async () => {      //학번은 숫자타입으로 비번은 스트링으로 온다.
   try {
-    await userStore.login({ studentID: studentID.value, password: password.value })
+    const loginplz = {
+      studentID: studentID.value, 
+      password: password.value
+    }
+    await userStore.login(loginplz)
     if (userStore.isLogin) {
+      alert('로그인 성공~!')
       router.push('/user/profile')
     } else {
       alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ')
+      router.push('/user/login')
     }
   } catch (error) {
-    alert('Login failed!')
+    alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ')
     console.error(error)
   }
 }
