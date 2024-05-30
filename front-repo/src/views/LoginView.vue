@@ -20,7 +20,7 @@
 import { ref } from 'vue'            //ref 는 반응형 변수,. 업뎃되면 어쩌고..
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/UserStore';
-
+ 
 const studentID = ref('')
 const password = ref('')       
 const router = useRouter()
@@ -29,7 +29,7 @@ const userStore = useUserStore()          //유저상태보기
 
 const handleLogin = async () => {      //학번은 숫자타입으로 비번은 스트링으로 온다.
   try {
-    const loginplz = {
+    const loginplz = {        
       studentID: studentID.value, 
       password: password.value
     }
