@@ -30,8 +30,8 @@ const userStore = useUserStore()          //유저상태보기
 const handleLogin = async () => {      //학번은 숫자타입으로 비번은 스트링으로 온다.
   try {
     const loginplz = {        
-      studentID: studentID.value, 
-      password: password.value
+      studentIDrequest: studentID.value, 
+      passwordrequest: password.value
     }
     await userStore.login(loginplz)
     if (userStore.isLogin) {
@@ -44,6 +44,7 @@ const handleLogin = async () => {      //학번은 숫자타입으로 비번은 
   } catch (error) {
     alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ')
     console.error(error)
+    router.push('/user/login')
   }
 }
 </script>
