@@ -5,13 +5,16 @@
     </div>
     <nav class="navbar-center">
       <a href="https://dk-aegis.org/" class="navbar-center-elemnt">이지스 홈페이지</a>
-      <RouterLink to="/about" class="navbar-center-elemnt">내 서재</RouterLink>
-      <RouterLink to="/contact" class="navbar-center-elemnt">도서 신청</RouterLink>
+      <RouterLink to="/user/profile" class="navbar-center-elemnt">내 서재</RouterLink>
+      <RouterLink to="/user/requestbook" class="navbar-center-elemnt">도서 신청</RouterLink>
+      <button @click = "test">요청의 버튼 테스트</button>
+      <button @click = "logout">로그아웃버튼이야</button>
+      <button @click = "borrowbook">책빌리기 ㅋㅋ</button>
     </nav>
 
     <div class="navbar-right">
       <RouterLink to="/user/login" class="navbar-right">
-        <button class="login-button">로그인</button>
+        <button class="login-button" @click = "logout" >로그아웃</button>
       </RouterLink>
       <!-- 새로운 버튼 추가 -->
     </div>
@@ -23,6 +26,39 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useUserStore } from '../stores/UserStore'
+
+const test = () => {
+  const userstore = useUserStore()
+  console.log(userstore)
+  console.log(userstore.token)
+  console.log(userstore.isLogin)
+}
+  
+
+const logout = () => {
+  const userstore = useUserStore()
+  userstore.token = null 
+  console.log(userstore.isLogin)
+}
+
+const borrowbook = () => {
+  const userstore = useUserStore()
+  userstore.borrowed = [
+    {
+      id: 1,
+      title: 'imtitle',
+      author: 'i'
+    },
+    {
+      id: 2,
+      title: 'youbars',
+      author: 'uuuu'
+    }
+  ]
+}
+
+  
 
 // 요청을 보내는 메소드 정의
 </script>

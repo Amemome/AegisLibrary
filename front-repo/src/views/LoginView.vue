@@ -19,7 +19,7 @@
 <script setup>
 import { ref } from 'vue'            //ref 는 반응형 변수,. 업뎃되면 어쩌고..
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/UserStore';
+import {useUserStore} from '@/stores/UserStore';
  
 const studentID = ref('')
 const password = ref('')       
@@ -36,7 +36,7 @@ const handleLogin = async () => {      //학번은 숫자타입으로 비번은 
     await userStore.login(loginplz)
     if (userStore.isLogin) {
       alert('로그인 성공~!')
-      router.push('/user/profile')
+      router.push('/')
     } else {
       alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ')
       router.push('/user/login')

@@ -3,24 +3,33 @@
     <div id="title"><h3>빌린 책 목록</h3></div>
 
     <ul>
-      <ul v-for="book in borrowedBooks" :key="book.id">
+      <ul v-for="book in books" :key="book.id">
         {{
           book.title
         }}
       </ul>
     </ul>
-  </div>
+  </div>  
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted} from 'vue';
+import {useUserStore} from '@/stores/UserStore';
 
-const borrowedBooks = ref([
-  { id: 1, title: 'The grat' },
-  { id: 2, title: 'The man' },
-  { id: 3, title: 'iamtheman' },
-  { id: 5, title: 'asdfasdfsd'}
-])
+const userStore = useUserStore();
+const profile = ref(null);         //null 이면 false
+const books = ref([]);
+
+
+
+onMounted(async () => {
+  await fetchBorrowBooks();
+});
+
+async function fetchBorrowBooks() {
+  books.value = userStore.borrowed;
+  console.log(profile.value)
+}
 </script>
 
 <style scoped>

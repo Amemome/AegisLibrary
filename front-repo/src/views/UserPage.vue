@@ -1,38 +1,94 @@
 <template>
-    <h1>안녕 유저네임</h1>
-    <div v-if = "profile">   
-        <h1>User Profile</h1>
-        <p>Username: {{ profile?.username }} </p>     <!--옵셔널 체이닝-->  
+    <h1>안녕하세요 Username 이곳은 당신의 세계입니다 . . .
+        반납을 해보실까요 . . ?
+    </h1>
+    <RouterLink to="/" class="home">검색하러가기</RouterLink>
+
+    <div v-if = "profile">      <!--옵셔널 체이닝-->  
         
     </div>
-    <div class = "booklog" v-if = "books.length">   <!--books 의 객체 리스트가 0이면 실행안되겠죠-->
-        <ul v-for="book in borrowedBooks" :key="book.id">
-        {{
-          book.title
-        }}
-      </ul>
+    <div class = "booklog">   <!--books 의 객체 리스트가 0이면 실행안되겠죠-->
+        <ul v-for="book in books" :key="book.id" class = "boks">
+            <div class = "container">
 
+            <p>제목:{{ book.title}}</p>
+            <p>저자:{{ book.author}} </p>
+        </div>
+            <button @click = "returnbook" class = "returnbook">반납</button> 
+      </ul>
+      
     </div>
+
+    <button @click = "deleteaccount" class = "removeaccount">계정삭제</button>
 
     
 </template>
 
 <script setup>
 
-import { ref, onMounted } from 'vue';
-import { useUserStore } from '@/stores/UserStore';
+import { ref, onMounted} from 'vue';
+import {useUserStore} from '@/stores/UserStore';
 
 const userStore = useUserStore();
 const profile = ref(null);         //null 이면 false
-const books = ([]);
+const books = ref([]);
 
+
+// 지금 profile 에 값이 들어가기 전에 html 이 로드되어서 null 값 처리되어서 뭐가 안됨 ㅠㅠ
 onMounted(async () => {
-    profile.value = await userStore.fetchUserProfile();
-    await fetchBorrowBooks
-})
+  // userStore.token 값이 null, undefined, 빈 문자열이 아닌지 확인
+  if (userStore.token) {
+    profile.value = 'userStore.token';
+  }
+  await fetchBorrowBooks();
+});
 
 async function fetchBorrowBooks() {
+  books.value = userStore.borrowed;
+  console.log(profile.value)
+}
+</script>
+
+<style scoped>
+
+p {
+    font-size: 24px;
+}
+
+.boks {
+    display: flex;
+    flex-direction: row;
+    border: 3px solid rgb(255, 0, 0 , 0.2);
+    border-radius: 25px;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.returnbook {
+    border: 0;
+    border-radius: 25px;
+    background-color: rgb(127, 255, 212,0.2)
+
 
 }
 
-</script>
+button.returnbook:hover {
+    background-color: rgba(0, 255, 170, 0.842)
+}
+.removeaccount{
+    border: 3px solid rgb(255, 0, 0 , 1);
+    color: red;
+    background-color: blue;
+}
+
+button.removeaccount:hover{
+    border: 3px solid rgb(81, 0, 255);
+    color: white;
+    background-color: red;
+}
+</style>

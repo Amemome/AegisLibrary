@@ -16,6 +16,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: NavBar,
+    meta: {
+      requireLogin: true,
+    },
     children: [
       {
         path: '/',
@@ -24,7 +27,10 @@ const routes = [
       {
         path: 'about',
         name: 'about',
-        component: AboutView
+        component: AboutView,
+        meta: {
+          requireLogin: true,
+        }
       },
       {
         path: 'search',
@@ -48,12 +54,13 @@ const routes = [
         component: RegisterView
       },
       {
-        path: '/',
+        path: 'profile',
         name: 'profile',
         component: UserPage,
         meta: {
           requireLogin: true,
-        }
+        },
+        
       },
       {
         path: '/admin',
@@ -68,15 +75,15 @@ const routes = [
   }
 ]
 
-const router = createRouter({
+const router = createRouter({ 
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 
 router.beforeEach((to,from,next) => {      //beforeach는 VueRouter 에서 사용하는 전역가드중 하나. 모든 라우트 이동 전에 실행된다.
   const userStore = useUserStore();
-  if (to.meta.requireLogin && !userStore.isLogin) {
-  next('/login');
+  if (to.meta.requireLogin && !userStore.isLogin) {   //로그인이 되지 않은 상태 에서는 login page 로 진입하게.
+  next('/user/login');
 } else {
   next();
 }
