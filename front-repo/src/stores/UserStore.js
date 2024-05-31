@@ -16,6 +16,7 @@ export const useUserStore = defineStore('user', {         //유저 고유 정보
   actions: {
     async login(loginplz) {
       try {
+        console.log(loginplz)
         const response = await Axios.post('/api/loginplease', loginplz); //post 서버에 요청 보내기 (엔드포인트,내용)
         console.log(response)    //확인용            
         const token = response.data.token;   

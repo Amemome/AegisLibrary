@@ -42,7 +42,7 @@ const handleLogin = async () => {      //학번은 숫자타입으로 비번은 
       router.push('/user/login')
     }
   } catch (error) {
-    alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ')
+    alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ') 
     console.error(error)
     router.push('/user/login')
   }

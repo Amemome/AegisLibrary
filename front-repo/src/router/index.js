@@ -9,16 +9,16 @@ import UserPage from '@/views/UserPage.vue'
 import AdminView from '../views/AdminView.vue'
 import NavBar from '@/components/NavBar.vue'
 
-import { useUserStore } from '@/stores/UserStore'
+// import { useUserStore } from '@/stores/UserStore'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: NavBar,
-    meta: {
+   /* meta: {
       requireLogin: true,
-    },
+    }, */
     children: [
       {
         path: '/',
@@ -80,14 +80,14 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to,from,next) => {      //beforeach는 VueRouter 에서 사용하는 전역가드중 하나. 모든 라우트 이동 전에 실행된다.
+/* router.beforeEach((to,from,next) => {      //beforeach는 VueRouter 에서 사용하는 전역가드중 하나. 모든 라우트 이동 전에 실행된다.
   const userStore = useUserStore();
   if (to.meta.requireLogin && !userStore.isLogin) {   //로그인이 되지 않은 상태 에서는 login page 로 진입하게.
   next('/user/login');
 } else {
   next();
 }
-});
+}); */
 
 
 export default router

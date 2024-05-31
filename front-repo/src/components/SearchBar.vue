@@ -15,7 +15,7 @@ const router = useRouter();
 const SearchBooks = () => {
   if (query.value.trim()) {
     router.push({name:'search',query: {q: query.value}})    //그냥 query.value 하면 왜 안되고 q:query.value 해야되는가 그리고 왜 뒤에 주소로 들어가지는가.
-    sessionStorage.setItem('searchResults', JSON.stringify(query.value));
+    
   }
 }
 
