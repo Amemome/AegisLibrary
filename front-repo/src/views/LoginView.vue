@@ -19,12 +19,13 @@
 <script setup>
 import { ref } from 'vue'            //ref 는 반응형 변수,. 업뎃되면 어쩌고..
 import { useRouter } from 'vue-router'
-import {useUserStore} from '@/stores/UserStore';
+//import {useUserStore} from '@/stores/UserStore';
+import Axios from '@/api'
  
 const studentID = ref('')
 const password = ref('')       
 const router = useRouter()
-const userStore = useUserStore()          //유저상태보기
+//const userStore = useUserStore()          //유저상태보기
 
 
 const handleLogin = async () => {      //학번은 숫자타입으로 비번은 스트링으로 온다.
@@ -33,14 +34,16 @@ const handleLogin = async () => {      //학번은 숫자타입으로 비번은 
       studentIDrequest: studentID.value, 
       passwordrequest: password.value
     }
-    await userStore.login(loginplz)
-    if (userStore.isLogin) {
-      alert('로그인 성공~!')
-      router.push('/')
-    } else {
-      alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ')
+
+    const response = await Axios.post('/api/loginplease', loginplz); //post 서버에 요청 보내기 (엔드포인트,내용)
+        console.log(response)    //확인용            
+        const isLogin = response.status;   
+        if (isLogin == 200) {
+          alert('로그인 성공!')
+          router.push('/')
+        } else {alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ')
       router.push('/user/login')
-    }
+      }
   } catch (error) {
     alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ') 
     console.error(error)

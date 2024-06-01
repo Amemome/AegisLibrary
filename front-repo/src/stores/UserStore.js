@@ -9,21 +9,17 @@ export const useUserStore = defineStore('user', {         //유저 고유 정보
     token: null,                                         //define store 아 근데 어차피 JWT 디코딩 하면 다 얻을 수 잇는 정보임 그냥 넣자
     borrowed: [],
     recentseen: [],
+    isLogin: false,
   }),
-  getters: {
-    isLogin: (state) => !!state.token,  //!! 연산자는 JavaScript에서 특정 값의 boolean 값을 반환하기 위해 사용됩니다. 이는 특정 값이 "truthy"한지 "falsy"한지 확인하는 데 유용합니다.
-  },
+  //!! 연산자는 JavaScript에서 특정 값의 boolean 값을 반환하기 위해 사용됩니다. 이는 특정 값이 "truthy"한지 "falsy"한지 확인하는 데 유용합니다.
   actions: {
     async login(loginplz) {
       try {
         console.log(loginplz)
-        const response = await Axios.post('/api/loginplease', loginplz); //post 서버에 요청 보내기 (엔드포인트,내용)
-        console.log(response)    //확인용            
-        const token = response.data.token;   
-        console.log(token)        //확인용           
-        this.token = token;
+                //확인용           
 
-        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;  //session storage 에 저장하면 새로고침 해도 저장되어있다. 
+
+        //Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;  //session storage 에 저장하면 새로고침 해도 저장되어있다. 
         
       } catch (error) {
         console.error('Login Failed!', error);     
