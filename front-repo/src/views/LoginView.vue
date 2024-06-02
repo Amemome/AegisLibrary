@@ -42,30 +42,30 @@ export default {
                   studentID: this.studentID,    
                   password: this.password,
                 }
-                const response = await Axios.post('/api/loginplease' ,null, {params: loginData}); 
+                const response = await Axios.post('/api/loginplease' ,loginData); 
 
                 if (response.status == 200) {
                   alert('로그인 성공!')
                   this.$router.push('/')
+                  } else {
+                    alert('로그인 실패~ㅠㅠ')
                   }
             } catch (error) {
               if (error.response) {
-                if (error.response.status === 409) {
+                if (error.response.status == 409) {
                   alert('로그인 실패~~');
                   this.$router.push('/user/login');
                 } else {
-                  this.errormessage = error.response.data;
-                }
-                } else {
-                  this.errormessage = '로그인 중 오류가 발생했습니다';
-                }
+                  alert('로그인 과정에 오류가 발생했습니다.')
                   this.$router.push('/user/login');
+                }
+      
             }
             
         }
     }
   }
-
+}
 </script>
 
 <style scoped>

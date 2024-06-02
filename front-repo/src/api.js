@@ -7,9 +7,4 @@ const Axios = axios.create({
   }
 });
 
-const token = sessionStorage.getItem('jwtToken');
-if (token) {
-  Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-}
-
 export default Axios;

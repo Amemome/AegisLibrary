@@ -63,19 +63,18 @@ export default {
                 if (error.response.status === 409) {
                   alert('중복된 정보입니다.');
                 } else {
-                  this.errormessage = error.response.data;
-                }
-                } else {
-                  this.errormessage = '회원가입 중 오류가 발생했습니다';
-                }
+                  alert('회원가입 실패~ ㅠㅠ.');
                   this.$router.push('/user/register');
+                }
+
+                  
             }
             
         }
     }
   }
   
-
+}
   
 </script>
     
