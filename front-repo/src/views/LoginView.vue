@@ -16,40 +16,56 @@
 
 
 
-<script setup>
-import { ref } from 'vue'            //ref 는 반응형 변수,. 업뎃되면 어쩌고..
-import { useRouter } from 'vue-router'
+<script>
+          //ref 는 반응형 변수,. 업뎃되면 어쩌고..
+
 //import {useUserStore} from '@/stores/UserStore';
 import Axios from '@/api'
- 
-const studentID = ref('')
-const password = ref('')       
-const router = useRouter()
+  
+
 //const userStore = useUserStore()          //유저상태보기
 
 
-const handleLogin = async () => {      //학번은 숫자타입으로 비번은 스트링으로 온다.
-  try {
-    const loginplz = {        
-      studentIDrequest: studentID.value, 
-      passwordrequest: password.value
-    }
 
-    const response = await Axios.post('/api/loginplease', loginplz); //post 서버에 요청 보내기 (엔드포인트,내용)
-        console.log(response)    //확인용            
-        const isLogin = response.status;   
-        if (isLogin == 200) {
-          alert('로그인 성공!')
-          router.push('/')
-        } else {alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ')
-      router.push('/user/login')
-      }
-  } catch (error) {
-    alert('로그인 실패~!ㅠㅠㅠㅠㅠㅠㅠㅠ') 
-    console.error(error)
-    router.push('/user/login')
+
+export default {
+      data() {               //이 컴포넌트(vue파일) 에서 정의되는 컴포넌트의 상태를 정의한다
+          return {
+              studentID: '',           //이 객체에는 컴포넌트에서 사용될 모든 변수들임.
+              password:'',
+        };
+    },
+    methods: {                // 각 컴포넌트에서 사용할 수 있는 메서드들을 정의한다.
+        async handleLogin() {  
+            try {
+                const loginData = {              //미리 정의를 해놔야지 이게 들어감 아니면 null 나와요 
+                  studentID: this.studentID,    
+                  password: this.password,
+                }
+                const response = await Axios.post('/api/loginplease' , loginData); 
+
+                if (response.status == 200) {
+                  alert('로그인 성공!')
+                  this.$router.push('/')
+                  }
+            } catch (error) {
+              if (error.response) {
+                if (error.response.status === 409) {
+                  alert('로그인 실패~~');
+                  this.$router.push('/user/login');
+                } else {
+                  this.errormessage = error.response.data;
+                }
+                } else {
+                  this.errormessage = '로그인 중 오류가 발생했습니다';
+                }
+                  this.$router.push('/user/login');
+            }
+            
+        }
+    }
   }
-}
+
 </script>
 
 <style scoped>
