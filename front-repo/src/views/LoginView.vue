@@ -42,7 +42,7 @@ export default {
                   studentID: this.studentID,    
                   password: this.password,
                 }
-                const response = await Axios.post('/api/loginplease' , loginData); 
+                const response = await Axios.post('/api/loginplease' ,null, {params: loginData}); 
 
                 if (response.status == 200) {
                   alert('로그인 성공!')
